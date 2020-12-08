@@ -14,6 +14,8 @@ app.get('*', (req, res) => {
     var distination = domains[index];
     distination['pathname'] = path;
     console.debug('redirect to: ' + url.format(distination));
-    res.redirect(302, url.format(distination));
+    // res.redirect(302, url.format(distination));
+    res.writeHead(302, {'Location': url.format(distination)});
+    res.end();
 })
 module.exports = app
