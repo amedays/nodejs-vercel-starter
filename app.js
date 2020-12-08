@@ -1,11 +1,10 @@
 const express = require('express')
-const { domain } = require('process')
 const url = require('url')
 const app = express()
 
 // [{"hostname":"baidu.com","protocol":"https:"}]
 let server = process.env.SERVER
-let domains = Json.parse(server)
+let domains = JSON.parse(server)
 
 let number = domains.length
 app.get('*', (req, res) => {
