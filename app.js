@@ -2,10 +2,8 @@ const express = require('express')
 const url = require('url')
 const app = express()
 
-// [{"hostname":"baidu.com","protocol":"https:"}]
-let server = process.env.SERVER
+let server = process.env.SERVER || '[{"hostname":"baidu.com","protocol":"https:"},{"hostname":"google.com","protocol":"https:"}]';
 let domains = JSON.parse(server)
-
 let number = domains.length
 app.get('*', (req, res) => {
     var date = new Date();
@@ -15,7 +13,7 @@ app.get('*', (req, res) => {
     let { path } = url.parse(req.url);
     var distination = domains[index];
     distination['pathname'] = path;
-    console.log(url.format(distination));
+    console.debug('redirect to: ' + url.format(distination));
     res.redirect(302, url.format(distination));
 })
 module.exports = app
